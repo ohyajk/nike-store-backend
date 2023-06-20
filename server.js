@@ -10,7 +10,6 @@ import orderRoute from './routes/orderRoute.js'
 const app = express()
 dotenv.config()
 const api = process.env.API_PATH
-console.log(api)
 // Middleware
 app.use(express.json())
 app.use(cors())
