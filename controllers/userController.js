@@ -8,11 +8,11 @@ export const getUserById = async (req, res) => {
         const { userId } = req.params;
         const user = await User.findById(userId);
         if (!user) {
-            return res.status(404).json({ error: 'User not found' });
+            return res.status(404).json({ message: 'User not found' });
         }
         res.json(user);
     } catch (error) {
-        res.status(500).json({ error: 'Server error' });
+        res.status(500).json({ message: 'Server error', error });
     }
 };
 
@@ -27,7 +27,7 @@ export const createUser = async (req, res) => {
         const user = await User.create({ firstName, lastName, email, password: hashedPassword });
         res.status(201).json(user);
     } catch (error) {
-        res.status(500).json({ error: 'Server error' });
+        res.status(500).json({ message: 'Server error', error });
     }
 };
 
@@ -89,18 +89,12 @@ export const login = async (req, res) => {
 
         const token = jwt.sign({ user: user._id }, process.env.SECRET, { expiresIn: '1h' });
 
-        const tokenPayload = {
-            token,
-            data,
-        };
-
-        res.cookie('token', tokenPayload, {
+        res.cookie('token', token, {
             httpOnly: true, // Cookie cannot be accessed by client-side JavaScript
             secure: true, // Only sent over HTTPS if enabled
             expires: new Date(Date.now() + 3600000),
         });
-
-        res.json("Logged in successfully");
+        res.status(200).json({ data });
     } catch (error) {
         res.status(500).json({ error: 'Server error Please try again...' });
     }

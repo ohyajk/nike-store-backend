@@ -1,17 +1,21 @@
 import jwt from 'jsonwebtoken';
 
 export const auth = (req, res, next) => {
-    const token = req.cookies.token;
+    const { cookies } = req;
 
-    if (!token) {
-        return res.status(401).json({ error: 'No token provided' });
+    if (!cookies.token) {
+        return res.status(401).json({ message: 'Unauthorized: Missing token' });
     }
 
-    try {
-        const decoded = jwt.verify(token, process.env.SECRET);
-        req.userId = decoded.userId;
+    const { token } = cookies;
+
+    jwt.verify(token, process.env.SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+        }
+
+        req.user = decoded;
+
         next();
-    } catch (error) {
-        res.status(401).json({ error: 'Invalid token' });
-    }
+    });
 };
