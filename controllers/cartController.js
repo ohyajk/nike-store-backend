@@ -4,12 +4,11 @@ import Cart from '../models/cartModel.js';
 export const addToCart = async (req, res) => {
     try {
         const cartItem = new Cart(req.body);
-        console.log(cartItem)
         await cartItem.save();
         res.status(201).json(cartItem);
-    } catch (err) {
-        res.status(500).json({ error: 'An error occurred while adding item to cart.' });
-        console.log(err)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ messgae: 'An error occurred while adding item to cart.', error });
     }
 };
 
