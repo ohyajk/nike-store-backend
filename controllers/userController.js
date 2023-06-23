@@ -75,31 +75,27 @@ export const deleteUser = async (req, res) => {
 // Login a user
 
 export const login = async (req, res) => {
-    try {
-        const { email, password } = req.body;
+    const { email, password } = req.body;
 
-        const user = await User.findOne({ email });
-        const data = { firstName: user.firstName, lastName: user.lastName, email: user.email, id: user._id }
-        if (!user) {
-            return res.status(401).json({ error: 'Invalid user email' });
-        }
-
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-
-        if (!isPasswordValid) {
-            return res.status(401).json({ error: 'Invalid user password' });
-        }
-
-
-        const token = jwt.sign({ user: user._id }, process.env.SECRET, { expiresIn: '1h' });
-
-        res.cookie('token', token, {
-            httpOnly: true, // Cookie cannot be accessed by client-side JavaScript
-            secure: true, // Only sent over HTTPS if enabled
-            expires: new Date(Date.now() + 3600000),
-        });
-        res.status(200).json({ data });
-    } catch (error) {
-        res.status(500).json({ error: 'Server error Please try again...' });
+    const user = await User.findOne({ email });
+    const data = { firstName: user.firstName, lastName: user.lastName, email: user.email, id: user._id }
+    if (!user) {
+        return res.status(401).json({ error: 'Invalid user email' });
     }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+        return res.status(401).json({ error: 'Invalid user password' });
+    }
+
+
+    const token = jwt.sign({ user: user._id }, process.env.SECRET, { expiresIn: '1h' });
+
+    res.cookie('token', token, {
+        httpOnly: true, // Cookie cannot be accessed by client-side JavaScript
+        secure: true, // Only sent over HTTPS if enabled
+        expires: new Date(Date.now() + 3600000),
+    });
+    res.status(200).json({ data });
 };
