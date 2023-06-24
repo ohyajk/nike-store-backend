@@ -4,10 +4,10 @@ const handleTransport = () => {
     const transporter = nodemailer.createTransport({
         host: 'smtp.sparkpostmail.com',
         port: 587,
-        secure: false,
+        secure: true,
         auth: {
-            user: process.env.NM_EMAIL1,
-            pass: process.env.NM_PASS1
+            user: process.env.NM_EMAIL,
+            pass: process.env.NM_PASS
         },
         requireTLS: true
     });
