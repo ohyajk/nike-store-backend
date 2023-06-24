@@ -9,7 +9,7 @@ const sendMail = (email, firstName) => {
         content: {
             from: 'nikestore@mail.jitenderkumar.in',
             subject: `Hello, ${firstName}`,
-            html: `<html><body><h1>Welcome To nikeStore ${firstName}</h1><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>`
+            html: `<html><body><h1>Welcome To nikeStore ${firstName}</h1><p>Thankyou for registering on nikestore...😍!</p></body></html>`
         },
         recipients: [
             { address: email }
