@@ -1,7 +1,7 @@
 import User from '../models/userModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { handleMailOptions, handleTransport } from '../mailer/nodemailer.js';
+import sendMail from '../mailer/nodemailer.js';
 
 // Get a user by ID
 export const getUserById = async (req, res) => {
@@ -27,13 +27,8 @@ export const createUser = async (req, res) => {
 
         const user = await User.create({ firstName, lastName, email, password: hashedPassword });
         const data = { firstName: user.firstName, lastName: user.lastName, email: user.email, id: user._id }
-        handleTransport().sendMail(handleMailOptions(email, `Welcome ${firstName}`, `Hello ${firstName} ${lastName} .You have successfully signed up for the Nike store app!`)).then(info => {
-            console.log('Email sent: ', info.messageId);
-        })
-            .catch(error => {
-                console.log('Error sending email: ', error);
-            });
         res.status(201).json(data);
+        sendMail(email, firstName);
     } catch (error) {
         if (error.code === 11000) {
             res.status(409).json({ message: 'Email Already In Use', error });

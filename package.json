@@ -18,7 +18,8 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.2.4",
     "nodemailer": "^6.9.3",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "sparkpost": "^2.1.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.5",
