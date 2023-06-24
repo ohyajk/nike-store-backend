@@ -4,7 +4,7 @@ const client = new SparkPost(process.env.SPARKPOST_API_KEY);
 const sendMail = (email, firstName) => {
     client.transmissions.send({
         options: {
-            sandbox: true
+            sandbox: false
         },
         content: {
             from: 'nikestore@mail.jitenderkumar.in',
