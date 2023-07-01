@@ -105,7 +105,7 @@ export const login = async (req, res) => {
             secure: true, // Only sent over HTTPS if enabled
             expires: new Date(Date.now() + 3600000),
         });
-        res.status(200).send("Logged In Sire ...");
+        res.status(200).json({ msg: "Logged In Sire ..." });
     } catch (error) {
         res.status(500).json({ error: 'Invalid Credentials or Server Error...' });
     }
