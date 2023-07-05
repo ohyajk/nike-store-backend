@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(cookieParser());
 app.use(cors({
     credentials: true,
-    accessControlAllowOrigin: true,
+    accessControlAllowOrigin: 'https://nike-store-backend.onrender.com/api',
     allowedHeaders: true
 }))
 
