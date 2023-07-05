@@ -14,8 +14,7 @@ const api = process.env.API_PATH
 // Middleware
 app.use(express.json())
 app.use(cookieParser());
-app.use("*", cors({
-    origin: true,
+app.use(cors({
     credentials: true,
     accessControlAllowOrigin: true,
     allowedHeaders: true
