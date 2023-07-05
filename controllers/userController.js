@@ -101,7 +101,7 @@ export const login = async (req, res) => {
             expires: new Date(Date.now() + 3600000),
         });
         res.cookie('id', userId, {
-            httpOnly: true, // Cookie cannot be accessed by client-side JavaScript
+            httpOnly: false, // Cookie cannot be accessed by client-side JavaScript
             secure: true, // Only sent over HTTPS if enabled
             expires: new Date(Date.now() + 3600000),
         });
