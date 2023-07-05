@@ -81,7 +81,8 @@ export const login = async (req, res) => {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
-        const userId = user._id
+        const userId = user._id;
+
         if (!user) {
             return res.status(401).json({ error: 'Invalid user email' });
         }
@@ -92,22 +93,14 @@ export const login = async (req, res) => {
             return res.status(401).json({ error: 'Invalid user password' });
         }
 
-
         const token = jwt.sign({ user: user._id }, process.env.SECRET, { expiresIn: '1h' });
 
-        res.cookie('token', token, {
-            secure: true, // Set to true if using HTTPS
-            httpOnly: true,
-            sameSite: 'none',
-            expires: new Date(Date.now() + 3600000),
-        });
-        res.cookie('id', userId, {
-            httpOnly: false, // Cookie cannot be accessed by client-side JavaScript
-            secure: true, // Only sent over HTTPS if enabled
-            sameSite: 'none',
-            expires: new Date(Date.now() + 3600000),
-        });
-        res.status(200).json({ msg: "Logged In Sire ..." });
+        // Set cookies as strings
+        const tokenCookie = `token=${encodeURIComponent(token)}; Secure; HttpOnly; SameSite=None; Expires=${new Date(Date.now() + 3600000).toUTCString()}`;
+        const idCookie = `id=${encodeURIComponent(userId)}; Secure; SameSite=None; Expires=${new Date(Date.now() + 3600000).toUTCString()}`;
+
+        res.setHeader('Set-Cookie', [tokenCookie, idCookie]);
+        res.status(200).json({ msg: 'Logged In Sire ...' });
     } catch (error) {
         res.status(500).json({ error: 'Invalid Credentials or Server Error...' });
     }
