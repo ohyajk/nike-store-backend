@@ -1,6 +1,5 @@
 import express from 'express'
 import cors from 'cors'
-import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import connectDB from './db.js'
 import userRoute from './routes/userRoute.js'
@@ -13,10 +12,10 @@ const api = process.env.API_PATH
 
 // Middleware
 app.use(express.json())
-app.use(cookieParser());
-app.use(cors({
+app.use("*", cors({
+    origin: true,
     credentials: true,
-    accessControlAllowOrigin: 'https://nike-store-backend.onrender.com/api',
+    accessControlAllowOrigin: true,
     allowedHeaders: true
 }))
 
