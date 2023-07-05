@@ -81,7 +81,7 @@ export const login = async (req, res) => {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
-        const userId = { id: user._id }
+        const userId = user._id
         if (!user) {
             return res.status(401).json({ error: 'Invalid user email' });
         }
