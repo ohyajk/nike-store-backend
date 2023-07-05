@@ -96,8 +96,8 @@ export const login = async (req, res) => {
         const token = jwt.sign({ user: user._id }, process.env.SECRET, { expiresIn: '1h' });
 
         res.cookie('token', token, {
-            httpOnly: true, // Cookie cannot be accessed by client-side JavaScript
-            secure: true, // Only sent over HTTPS if enabled
+            secure: true, // Set to true if using HTTPS
+            httpOnly: true,
             expires: new Date(Date.now() + 3600000),
         });
         res.cookie('id', userId, {
