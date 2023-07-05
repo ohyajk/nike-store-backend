@@ -98,11 +98,13 @@ export const login = async (req, res) => {
         res.cookie('token', token, {
             secure: true, // Set to true if using HTTPS
             httpOnly: true,
+            sameSite: 'none',
             expires: new Date(Date.now() + 3600000),
         });
         res.cookie('id', userId, {
             httpOnly: false, // Cookie cannot be accessed by client-side JavaScript
             secure: true, // Only sent over HTTPS if enabled
+            sameSite: 'none',
             expires: new Date(Date.now() + 3600000),
         });
         res.status(200).json({ msg: "Logged In Sire ..." });
