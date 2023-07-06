@@ -7,7 +7,7 @@ const sendMail = (email, firstName) => {
             sandbox: false
         },
         content: {
-            from: 'nikestore@mail.jitenderkumar.in',
+            from: 'nikestore@mailer.jitenderkumar.in',
             subject: `Hello, ${firstName}`,
             html: `<html><body><h1>Welcome To nikeStore ${firstName}</h1><p>Thankyou for registering on nikestore...😍!</p></body></html>`
         },
