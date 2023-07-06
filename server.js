@@ -10,13 +10,15 @@ import cookieParser from 'cookie-parser'
 const app = express()
 dotenv.config()
 const api = process.env.API_PATH
-const corsOptions = {
-    origin: '*',
-}
 // Middleware
-app.use(cors(corsOptions))
 app.use(express.json())
 app.use(cookieParser())
+app.use("*", cors({
+    origin: true,
+    credentials: true,
+    accessControlAllowOrigin: true,
+    allowedHeaders: true
+}))
 // Connect DB
 connectDB()
 
