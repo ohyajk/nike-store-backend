@@ -7,6 +7,6 @@ const router = express.Router();
 router.post('/order/new', addOrder);
 
 // Route for getting orders by user ID
-router.get('/order/:id', getOrdersByUserId);
+router.get('/orders/:id', getOrdersByUserId);
 
 export default router;

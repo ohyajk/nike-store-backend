@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 
 export const auth = (req, res, next) => {
-    const { cookies } = req;
+    const cookies = req.headers?.cookie
 
-    if (!cookies.token) {
+    if (!cookies?.token) {
         return res.status(401).json({ message: 'Unauthorized: Missing token' });
     }
 
