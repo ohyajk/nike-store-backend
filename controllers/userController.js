@@ -11,7 +11,8 @@ export const getUserById = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        res.json(user);
+        const data = { firstName: user.firstName, lastName: user.lastName, email: user.email, id: user._id, verified: user.verified }
+        res.json(data);
     } catch (error) {
         res.status(500).json({ message: 'Server error', error });
     }
