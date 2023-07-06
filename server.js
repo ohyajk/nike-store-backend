@@ -5,13 +5,14 @@ import connectDB from './db.js'
 import userRoute from './routes/userRoute.js'
 import productRoute from './routes/productRoute.js'
 import orderRoute from './routes/orderRoute.js'
-
+import cookieParser from 'cookie-parser'
 const app = express()
 dotenv.config()
 const api = process.env.API_PATH
 
 // Middleware
 app.use(express.json())
+app.use(cookieParser())
 app.use("*", cors({
     origin: true,
     credentials: true,
