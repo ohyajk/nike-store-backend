@@ -96,23 +96,7 @@ export const login = async (req, res) => {
 
         const token = jwt.sign({ user: user._id }, process.env.SECRET, { expiresIn: '1h' });
 
-        // Set cookies as strings
-        const tokenCookie = encodeURIComponent(token);
-        const idCookie = encodeURIComponent(userId);
-
-        res.cookie('token', tokenCookie, {
-            secure: true, // Set to true if using HTTPS
-            httpOnly: true,
-            sameSite: 'none',
-            expires: new Date(Date.now() + 3600000), // Expires in 1 hour
-        });
-        res.cookie('id', idCookie, {
-            secure: true, // Set to true if using HTTPS
-            httpOnly: true,
-            sameSite: 'none',
-            expires: new Date(Date.now() + 3600000), // Expires in 1 hour
-        });
-        res.status(200).json({ msg: 'Logged In Sire ...' });
+        res.status(200).json({ id: userId, token: token, msg: 'Logged In Sire ...' });
     } catch (error) {
         res.status(500).json({ error: 'Invalid Credentials or Server Error...' });
     }
