@@ -6,13 +6,16 @@ import userRoute from './routes/userRoute.js'
 import productRoute from './routes/productRoute.js'
 import orderRoute from './routes/orderRoute.js'
 import cookieParser from 'cookie-parser'
+
 const app = express()
 dotenv.config()
 const api = process.env.API_PATH
-
+const corsOptions = {
+    origin: '*',
+}
 // Middleware
+app.use(cors(corsOptions))
 app.use(express.json())
-app.use(cors())
 app.use(cookieParser())
 // Connect DB
 connectDB()
