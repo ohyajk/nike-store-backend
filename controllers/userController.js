@@ -82,7 +82,6 @@ export const login = async (req, res) => {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
-        const userId = user._id;
 
         if (!user) {
             return res.status(401).json({ error: 'Invalid user email' });
@@ -96,7 +95,7 @@ export const login = async (req, res) => {
 
         const token = jwt.sign({ user: user._id }, process.env.SECRET, { expiresIn: '1h' });
 
-        res.status(200).json({ id: userId, token: token, msg: 'Logged In Sire ...' });
+        res.status(200).json({ user: user, token: token, msg: 'Logged In Sire ...' });
     } catch (error) {
         res.status(500).json({ error: 'Invalid Credentials or Server Error...' });
     }
