@@ -8,9 +8,7 @@ export const addOrder = async (req, res) => {
         const order = new Order({
             user,
             items,
-            subTotal,
-            tax,
-            grandTotal,
+            totalAmount,
             shippingAddress,
             status: 'pending',
         });
