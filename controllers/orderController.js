@@ -26,7 +26,7 @@ export const getOrdersByUserId = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const orders = await Order.find({ user: id });
+        const orders = await Order.find({ user: id }).populate('items.product');
 
         res.status(200).json(orders);
     } catch (err) {
