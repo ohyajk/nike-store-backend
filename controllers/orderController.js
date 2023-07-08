@@ -3,7 +3,7 @@ import Order from '../models/orderModel.js';
 // Post an order
 export const addOrder = async (req, res) => {
     try {
-        const { user, items, subTotal, tax, grandTotal, shippingAddress } = req.body;
+        const { user, items, totalAmount, shippingAddress } = req.body;
 
         const order = new Order({
             user,
