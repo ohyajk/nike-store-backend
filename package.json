@@ -4,7 +4,7 @@
   "description": "nike store bakcend",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --exec babel-node server.js",
+    "start": "node --exec babel-node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "jk",
