@@ -1,6 +1,6 @@
 import { Router } from 'express';
 const router = Router();
-import { createProduct, getAllProducts, getProductById } from '../controllers/productController';
+import { createProduct, getAllProducts, getProductById } from '../controllers/productController.js';
 
 // Create a new product
 router.post('/product/new', createProduct);

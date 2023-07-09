@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "nike store bakcend",
   "main": "server.js",
+  "type": "module",
   "scripts": {
-    "start": "node --exec babel-node server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "jk",
