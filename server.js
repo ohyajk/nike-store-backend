@@ -13,12 +13,7 @@ const api = process.env.API_PATH
 // Middleware
 app.use(express.json())
 app.use(cookieParser())
-app.use("*", cors({
-    origin: true,
-    credentials: true,
-    accessControlAllowOrigin: true,
-    allowedHeaders: true
-}))
+app.use(cors())
 // Connect DB
 connectDB()
 
